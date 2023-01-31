@@ -1,8 +1,9 @@
 import React from 'react';
 import style from "./Botao.module.scss"
 
-class Button extends React.Component {
+class Button extends React.Component <{type?: "button" | "submit" | "reset" | undefined, texto: string}> {
     render() {
+        const { type = "button"} = this.props
         // const estaAtivo = false;
         // const styles = {
         //     backgroundColor: estaAtivo ? "green" : "red",
@@ -10,8 +11,8 @@ class Button extends React.Component {
         // }
         return (
             //style={styles}
-      <button className={style.botao}>  
-                Botão
+      <button type={type} className={style.botao}>  
+              {this.props.texto}  
             </button>
         )
     }
