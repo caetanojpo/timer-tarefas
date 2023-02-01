@@ -55,8 +55,7 @@ class Forms extends React.Component<{
               this.setState({ ...this.state, tempo: evento.target.value })
             }
             id="tempo"
-            min="00:00:00"
-            max="01:30:00"
+            min="00:00:00"        
             required
           />
         </div>

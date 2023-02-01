@@ -11,7 +11,10 @@ function App() {
   
   function selecionaTarefa(tarefaSelecionada: ITarefa) {
     setSelecionado(tarefaSelecionada);
-    
+    setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => ({
+      ...tarefa,
+      selecionado: tarefa.id === tarefaSelecionada.id ? true : false
+    })));
   }
   return (
     <div className={style.AppStyle}>
@@ -19,7 +22,7 @@ function App() {
      <List 
      tarefas={tarefas}
      selecionaTarefa={selecionaTarefa}/>
-     <Timer/>
+     <Timer selecionado={selecionado}/>
     </div>
   );
 }
