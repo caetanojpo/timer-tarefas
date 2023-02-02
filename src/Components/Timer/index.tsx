@@ -37,7 +37,7 @@ function regressiva(contador:number = 0){
         <Clock tempo={tempo} />
       </div>
 
-      <Button onClick={() => regressiva(tempo)} texto="Começar" />
+      <Button onClick={() => regressiva(tempo)} > Começar</Button>
     </div>
   );
 }
