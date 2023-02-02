@@ -1,9 +1,23 @@
 import React from 'react';
 import style from "./Botao.module.scss"
 
-class Button extends React.Component <{type?: "button" | "submit" | "reset" | undefined, texto: string}> {
+interface Props {
+    type?: "button" | "submit" | "reset" | undefined, 
+    onClick?: () => void, 
+    children?: React.ReactNode
+}
+
+function Botao({ onClick, type, children}: Props) {
+    return(
+        <button onClick={onClick} type={type} className={style.botao}>  
+              {children}  
+            </button>
+    )
+}
+
+class Button extends React.Component <{type?: "button" | "submit" | "reset" | undefined, onClick?: () => void, texto: string}> {
     render() {
-        const { type = "button"} = this.props
+        const { type = "button", onClick } = this.props
         // const estaAtivo = false;
         // const styles = {
         //     backgroundColor: estaAtivo ? "green" : "red",
@@ -11,7 +25,7 @@ class Button extends React.Component <{type?: "button" | "submit" | "reset" | un
         // }
         return (
             //style={styles}
-      <button type={type} className={style.botao}>  
+      <button onClick={onClick} type={type} className={style.botao}>  
               {this.props.texto}  
             </button>
         )
