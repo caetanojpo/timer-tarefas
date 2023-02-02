@@ -1,47 +1,47 @@
-import {useState} from 'react';
-import Forms from '../Components/Form';
-import List from '../Components/List';
-import Timer from '../Components/Timer';
-import { ITarefa } from '../types/tarefa';
-import style from './App.module.scss';
+import { useState } from "react";
+import Forms from "../Components/Form";
+import List from "../Components/List";
+import Timer from "../Components/Timer";
+import { ITarefa } from "../types/tarefa";
+import style from "./App.module.scss";
 
 function App() {
-  const [tarefas, setTarefas] = useState<ITarefa[] >([]);
+  const [tarefas, setTarefas] = useState<ITarefa[]>([]);
   const [selecionado, setSelecionado] = useState<ITarefa>();
-  
+
   function selecionaTarefa(tarefaSelecionada: ITarefa) {
     setSelecionado(tarefaSelecionada);
-    setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => ({
-      ...tarefa,
-      selecionado: tarefa.id === tarefaSelecionada.id ? true : false
-    })));
+    setTarefas((tarefasAnteriores) =>
+      tarefasAnteriores.map((tarefa) => ({
+        ...tarefa,
+        selecionado: tarefa.id === tarefaSelecionada.id ? true : false,
+      }))
+    );
   }
 
   function finalizarTarefa() {
-    if(selecionado) {
+    if (selecionado) {
       setSelecionado(undefined);
-      setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => {
-        if(tarefa.id == selecionado.id){
-          return{
-            ...tarefa,
-            selecionado:false,
-            completado: true
+      setTarefas((tarefasAnteriores) =>
+        tarefasAnteriores.map((tarefa) => {
+          if (tarefa.id == selecionado.id) {
+            return {
+              ...tarefa,
+              selecionado: false,
+              completado: true,
+            };
           }
-        }
-        return tarefa;
-      }))
+          return tarefa;
+        })
+      );
     }
   }
 
   return (
     <div className={style.AppStyle}>
-     <Forms setTarefas={setTarefas}/>
-     <List 
-     tarefas={tarefas}
-     selecionaTarefa={selecionaTarefa}/>
-     <Timer 
-     selecionado={selecionado}
-     finalizarTarefa={finalizarTarefa}/>
+      <Forms setTarefas={setTarefas} />
+      <List tarefas={tarefas} selecionaTarefa={selecionaTarefa} />
+      <Timer selecionado={selecionado} finalizarTarefa={finalizarTarefa} />
     </div>
   );
 }
